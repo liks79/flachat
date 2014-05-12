@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block title %}List{% endblock %}
+{% block head %}
+  {{ super() }}
+
+    <script>
+        function new_user(){
+            bootbox.prompt("대화명을 입력하세요", function(result) {
+                if (result === null) {
+                    bootbox.alert("취소되었습니다.");
+                } else {
+                    $('#nickname').val(result);
+                    $('#nickname_form').submit();
+                }
+            });
+        }
+
+        function logged_user(){
+            $('#nickname').val('{{ session['nickname'] }}');
+            $('#nickname_form').submit();
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <h2>Welcome!</h2>
+
+    </p>
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> 대화 내용</div>
+      <div class="panel-body">
+          <!-- Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>채널이름</th>
+                <th><span class="glyphicon glyphicon-user"></span> 참여자 </th>
+                <th>입장하기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>[IT 북포럼] 4회</td>
+                <td> <span class="badge">{{ users_cnt() }} 명</span></td>
+
+                {%  if not session.logged_in %}
+                    <td><button type="button" class="btn btn-default btn-sm" onclick="JAVASCRIPT:new_user();"><span class="glyphicon glyphicon-log-in"></span> 입장</button></td>
+                {% else %}
+                    <td><button type="button" class="btn btn-default btn-sm" onclick="JAVASCRIPT:logged_user();"><span class="glyphicon glyphicon-log-in"></span> 입장</button></td>
+                {% endif %}
+
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+    <form id="nickname_form" action="/chat" method="POST">
+        <input type="HIDDEN" id="nickname" name="nickname" value=""/>
+    </form>
+
+    <div class="panel-footer"><span class="glyphicon glyphicon-thumbs-up"></span> Flachat</div>
+
+
+{% endblock %}
+
+{% block footer %} {% endblock %}

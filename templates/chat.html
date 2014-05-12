@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block title %}Chat{% endblock %}
+{% block head %}
+  {{ super() }}
+
+    <script>
+
+        function server_side_event() {
+
+            var source = new EventSource('/stream');
+
+            source.onmessage = function(event) {
+
+                var msg = event.data;
+                var prev_msg = $('#message_recv').html();
+
+                if(msg == '1') chat_records = '';
+                else chat_records = prev_msg + msg + '<br>';
+
+                $('#message_recv').html(chat_records);
+                $('#input').val('');
+            };
+
+        }
+        server_side_event();
+
+    </script>
+
+
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <h3><span class="glyphicon glyphicon-ok"></span> [IT 북포럼] 4회 (<span class="glyphicon glyphicon-user"></span> {{ users_cnt() }} 명)</h3>
+    </p>
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span> 대화내용</div>
+      <div class="panel-body">
+          <!-- chatting message -->
+          <div  class="well" id="message_recv">
+          </div>
+      </div>
+    </div>
+<!--
+    <div class="panel-footer">
+-->
+        <div class="input-group">
+            <span class="input-group-addon"><b>{{ session['nickname'] }}</b></span>
+            <input id="input" type="text" class="form-control" placeholder="메시지를 입력하세요..">
+                <span class="input-group-btn">
+                    <button id="send" class="btn btn-default" type="button" onclick="javascript:send();"><span class="glyphicon glyphicon-send"></span> SEND</button>
+                </span>
+        </div><!-- /input-group -->
+<!--
+    </div>
+-->
+
+{% endblock %}
+
+
+{% block footer %}
+    <script>
+
+        $('#input').bind('keyup', function(e) {
+            if(e.keyCode == 13){
+                send();
+            }
+        });
+
+
+        function send(){
+            $.post('/send', {'message': $('#input').val()});
+            $('#input').val('');
+        }
+
+    </script>
+{% endblock %}
