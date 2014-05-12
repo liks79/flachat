@@ -9,11 +9,11 @@ Install
 -------
 
 * Prerequiste
-- Redis : http://redis.io/download
+Redis : http://redis.io/download
 
 * Python library dependency
-- pip install flask gevent gunicorn
+pip install flask gevent gunicorn
 
 Run
 ---
-* gunicorn --debug --worker-class=gevent -t 99999 flachat:app -b 0.0.0.0:8000
+gunicorn --debug --worker-class=gevent -t 99999 flachat:app -b 0.0.0.0:8000
