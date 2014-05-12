@@ -9,9 +9,11 @@ Install
 -------
 
 * Prerequiste
+
 Redis : http://redis.io/download
 
 * Python library dependency
+
 pip install flask gevent gunicorn
 
 Run
