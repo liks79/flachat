@@ -44,16 +44,8 @@ def stream():
 @app.route('/logout')
 def logout():
     pubsub = r.pubsub()
-    cnt = pubsub.execute_command('PUBSUB', 'NUMSUB', channel_name)
-
-    print 'before cnt : %s', cnt
-
     pubsub.unsubscribe(channel_name)
-    pubsub.execute_command('UNSUBSCRIBE', channel_name)
-
     session.clear()
-    cnt = r.execute_command('PUBSUB', 'NUMSUB', channel_name)
-    print 'after cnt : %s', cnt
 
     return redirect(url_for('index'))
 
