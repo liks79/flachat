@@ -18,4 +18,4 @@ Install
 
 Run
 ---
-gunicorn --debug --worker-class=gevent -t 99999 flachat:app -b 0.0.0.0:8000
+gunicorn --debug --worker-class=gevent -t 600 flachat:app -b 0.0.0.0:8000
