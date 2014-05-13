@@ -1,9 +1,13 @@
 Flachat
 =======
 
-Flask chat application with Redis
+Flask chat application using Redis
 
-
+Motivated project
+------------------
+* https://gist.github.com/pietern/348262
+* https://github.com/jakubroztocil/chat
+* https://github.com/steffenwt/nodejs-pub-sub-chat-demo
 
 Install
 -------
@@ -19,3 +23,4 @@ Install
 Run
 ---
 gunicorn --debug --worker-class=gevent -t 600 flachat:app -b 0.0.0.0:8000
+
