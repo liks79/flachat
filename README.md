@@ -18,7 +18,7 @@ Install
 
 * Python library dependency
 
-    pip install flask gevent gunicorn
+    pip install flask redis gevent gunicorn
 
 Run
 ---
