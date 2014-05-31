@@ -46,13 +46,15 @@
           <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-thumbs-up"></span>
 Flachat</a>
         </div>
+
         {% if session %}
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a id="logout-link" href="/logout">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
               </ul>
             </div>
         {%  endif %}
+
       </div>
     </div>
 
