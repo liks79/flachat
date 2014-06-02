@@ -22,5 +22,8 @@ Install
 
 Run
 ---
-gunicorn --debug --worker-class=gevent -t 600 flachat:app -b 0.0.0.0:8000
+* Using gunicorn
+  gunicorn --debug --worker-class=gevent -t 600 flachat:app -b 0.0.0.0:8000
 
+* Using twisted
+  twistd -n web --port 8000 --wsgi flachat.app
